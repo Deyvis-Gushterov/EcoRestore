@@ -16,6 +16,6 @@
 
         //Fauna
         public const int MinFaunaNameLength = 2;
-        public const int MaxFaunaNameLength = 20;
+        public const int MaxFaunaNameLength = 40;
     }
 }

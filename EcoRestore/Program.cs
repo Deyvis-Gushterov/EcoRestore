@@ -19,6 +19,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<EcoRestoreDbContext>();
+    await DbSeeder.SeedAsync(db);
+}
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
