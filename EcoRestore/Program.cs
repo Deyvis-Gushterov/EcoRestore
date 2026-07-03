@@ -1,4 +1,6 @@
 using EcoRestore.Data;
+using EcoRestore.Services.Implementations;
+using EcoRestore.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<EcoRestoreDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IPlotService, PlotService>();
+builder.Services.AddScoped<IPlantingPlanService, PlantingPlanService>();
 
 
 var app = builder.Build();
