@@ -1,0 +1,19 @@
+﻿@page
+@model EcoRestore.Pages.UrgencyTestModel
+
+<h2>Urgency Calculation Test</h2>
+
+<form method="get">
+    <label>Latitude:</label>
+    <input type="text" name="Latitude" value="@Model.Latitude" />
+
+    <label>Longitude:</label>
+    <input type="text" name="Longitude" value="@Model.Longitude" />
+
+    <button type="submit">Calculate Urgency</button>
+</form>
+
+@if (Model.Searched)
+{
+    <h3>Result: @Model.Urgency</h3>
+}

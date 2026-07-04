@@ -15,6 +15,8 @@ namespace EcoRestore.Models
         [Required]
         public double AreaHectares { get; set; }
         public string? Location {  get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public int? SoilTypeId { get; set; }
         public SoilType? SoilType { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -1,0 +1,28 @@
+﻿@page
+@model EcoRestore.Pages.SoilTestModel
+
+<h2>Soil Data Test</h2>
+
+<form method="get">
+    <label>Latitude:</label>
+    <input type="text" name="Latitude" value="@Model.Latitude" />
+
+    <label>Longitude:</label>
+    <input type="text" name="Longitude" value="@Model.Longitude" />
+
+    <button type="submit">Fetch Soil Data</button>
+</form>
+
+@if (Model.Result != null)
+{
+    <h3>Result:</h3>
+    <ul>
+        <li>Organic Carbon: @Model.Result.OrganicCarbon</li>
+        <li>pH: @Model.Result.Ph</li>
+        <li>Clay Content: @Model.Result.ClayContent</li>
+    </ul>
+}
+else if (Model.Searched)
+{
+    <p>No data returned (check coordinates, or the API might have failed).</p>
+}

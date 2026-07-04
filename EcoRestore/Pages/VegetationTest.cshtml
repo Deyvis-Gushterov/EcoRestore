@@ -1,0 +1,39 @@
+﻿@page
+@model EcoRestore.Pages.VegetationTestModel
+
+<h2>Vegetation Data (NDVI) Test</h2>
+
+<form method="get">
+    <label>Latitude:</label>
+    <input type="text" name="Latitude" value="@Model.Latitude" />
+
+    <label>Longitude:</label>
+    <input type="text" name="Longitude" value="@Model.Longitude" />
+
+    <button type="submit">Fetch NDVI</button>
+</form>
+
+@if (Model.Searched)
+{
+    if (Model.Ndvi.HasValue)
+    {
+        <h3>Result:</h3>
+        <p>NDVI: @Model.Ndvi</p>
+        <p>
+            @{
+                string interpretation = Model.Ndvi switch
+                {
+                    < 0 => "Water or bare surface",
+                    < 0.2 => "Bare soil / very sparse vegetation",
+                    < 0.5 => "Moderate vegetation",
+                    _ => "Dense, healthy vegetation"
+                };
+            }
+            Interpretation: @interpretation
+        </p>
+    }
+    else
+    {
+        <p>No data returned (check coordinates, or try an earlier date range).</p>
+    }
+}

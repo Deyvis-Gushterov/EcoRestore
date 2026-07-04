@@ -1,6 +1,6 @@
 using EcoRestore.Data;
-using EcoRestore.Services.Implementations;
 using EcoRestore.Services.Interfaces;
+using EcoRestore.Services.Implementations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<EcoRestoreDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<IPlotService, PlotService>();
 builder.Services.AddScoped<IPlantingPlanService, PlantingPlanService>();
-
+builder.Services.AddHttpClient<ISoilDataService, SoilDataService>();
+builder.Services.AddHttpClient<IVegetationDataService, VegetationDataService>();
+builder.Services.AddScoped<IUrgencyCalculationService, UrgencyCalculationService>();
 
 var app = builder.Build();
 
@@ -19,7 +22,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
